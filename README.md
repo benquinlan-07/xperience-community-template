@@ -1,55 +1,122 @@
-# Xperience Community: Exports
+# Xperience by Kentico Community Package Template
 
 ## Description
 
-This package provides Xperience by Kentico administrators with an option to export data across various listing interfaces. The implementation also allows for developers to easily extend the implementation to allow for exporting across other listing pages within the administration.
+This is a template repository for creating Xperience by Kentico community packages. It provides a complete foundation for developing extensions and community packages for Xperience by Kentico applications.
 
-![Xperience by Kentico Exports](https://raw.githubusercontent.com/benquinlan-07/xperience-community-exports/refs/heads/main/images/export-users.png)
+## Template Structure
 
-## Library Version Matrix
+This template includes:
 
-| Xperience Version | Library Version |
-| ----------------- | --------------- |
-| >= 30.8.0         | 1.0.0           |
-
+- **Class Library Project** (`XperienceCommunity.ExtensionTemplate`) - The main extension library containing:
+  - Admin module registration and configuration
+  - Client-side components (React/TypeScript)
+  - Custom components and properties
+  - Extension permissions and constants
+  
+- **UI Testing Library** (`XperienceCommunity.ExtensionTemplate.UITests`) - Automated testing framework including:
+  - Base test classes and utilities
+  - Web driver extensions and helpers
+  - Core website testing functionality
+  
+- **Example Scripts** - Sample scripts for development and testing:
+  - Dancing Goat initialization script for testing your extension
+  - Template configuration examples
 
 ### Dependencies
 
 - [ASP.NET Core 8.0](https://dotnet.microsoft.com/en-us/download)
-- [Xperience by Kentico](https://docs.kentico.com)
+- [Xperience by Kentico](https://docs.kentico.com) (latest version)
+- [Node.js](https://nodejs.org/) (for client-side development)
 
-## Package Installation
+## Getting Started
 
-Add the package to your application using the .NET CLI
+### 1. Initialize Your Extension
 
-```
-dotnet add package XperienceCommunity.Exports
-```
+Use the provided PowerShell script to transform this template into your custom extension:
 
-or via the Package Manager
-
-```
-Install-Package XperienceCommunity.Exports
+```powershell
+.\Init-Template.ps1 -ExtensionName "YourExtensionName"
 ```
 
-## Quick Start
+**Example:**
+```powershell
+.\Init-Template.ps1 -ExtensionName "FormNotifications"
+```
 
-1. Install the NuGet package.
+This script will:
+- Rename all directories and files from `XperienceCommunity.ExtensionTemplate` to `XperienceCommunity.YourExtensionName`
+- Update all namespace references in code files
+- Replace template placeholders with your extension name
+- Update package.json and configuration files
+- Clean up by removing the initialization script
 
-1. Login to the admin and look for the export button on any of the following applications:
+### 2. Set up Development Environment
 
-    - Users
-    - Members
-    - Orders
-    - Customers
-    - Forms
-    - Form Submissions
+After initializing your extension:
 
-## Adding Export to Listing Pages
+1. **Build the solution:**
+   ```bash
+   dotnet build src/XperienceCommunity.YourExtensionName.sln
+   ```
 
-As per the implementations in this repository, simply create a class that extends from the `XperienceCommunity.Exports.PageExtenders.Base.ExportPageExtender<>` class and implement any required methods.
+2. **Install client-side dependencies:**
+   ```bash
+   cd src/XperienceCommunity.YourExtensionName/Client
+   npm install
+   ```
 
-Don't forget to register the page extender with an assembly attribute
-````csharp
-[assembly: PageExtender(typeof(UserListPageExtender))]
-````
+3. **Build client assets:**
+   ```bash
+   npm run build
+   ```
+
+### 3. Test with Dancing Goat (Optional)
+
+Use the provided Dancing Goat initialization script to create a test environment:
+
+```powershell
+cd example
+.\Init-DancingGoat.ps1
+```
+
+This will create a Dancing Goat sample project with the latest Xperience by Kentico version that references your extension for testing purposes.
+
+## Development Guidelines
+
+### Project Structure
+
+- `src/XperienceCommunity.ExtensionTemplate/` - Main extension library
+  - `Client/` - TypeScript/React components and build configuration
+  - `Components/` - Server-side custom components
+  - `Models/` - Data models and info classes
+  - `*.cs` - Core extension files (modules, permissions, etc.)
+
+- `src/XperienceCommunity.ExtensionTemplate.UITests/` - UI testing framework
+  - `Core/` - Base test classes
+  - `Helpers/` - Testing utilities and extensions
+
+### Naming Conventions
+
+- Use PascalCase for your extension name (e.g., `FormNotifications`, `CustomAnalytics`)
+- The template automatically handles namespace and file naming conversions
+- Package names will follow the pattern `xperiencecommunity{extensionname}-web-admin`
+
+### Client-Side Development
+
+The template includes a complete webpack build setup for TypeScript and React development:
+
+- Entry point: `Client/src/entry.tsx`
+- Custom components: `Client/src/components/custom/`
+- Build configuration: `Client/webpack.config.js`
+
+## Next Steps
+
+1. **Customize your extension** - Modify the template code to implement your specific functionality
+2. **Update documentation** - Replace this README with documentation specific to your extension
+3. **Set up CI/CD** - Configure build and deployment pipelines
+4. **Publish to NuGet** - Package and distribute your community extension
+
+## Contributing
+
+This template is designed to streamline community package development for Xperience by Kentico. If you have suggestions for improvements to the template itself, please submit an issue or pull request.
