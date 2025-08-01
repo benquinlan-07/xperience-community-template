@@ -1,0 +1,8 @@
+﻿{
+  "CMSAdminClientModuleSettings": {
+    "xperiencecommunityextensiontemplates-web-admin": {
+      "Mode": "Proxy",
+      "Port": 3009
+    }
+  }
+}
